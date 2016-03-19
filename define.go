@@ -1,4 +1,4 @@
-package common // import "moetang.info/go/common"
+package common
 
 type HashObj interface {
 	Hash() int32

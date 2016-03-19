@@ -1,4 +1,4 @@
-package common // import "moetang.info/go/common"
+package common
 
 import (
 	"fmt"
