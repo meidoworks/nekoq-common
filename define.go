@@ -1,5 +1,5 @@
 package common
 
 type HashObj interface {
-	Hash() int32
+	Hash() uint32
 }
