@@ -1,1 +1,1 @@
-package common // import "moetang.info/go/common"
+package common // import "import.moetang.info/go/nekoq-common"

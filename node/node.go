@@ -5,7 +5,7 @@ import (
 )
 
 import (
-	"moetang.info/go/common/hash"
+	"import.moetang.info/go/nekoq-common/hash"
 )
 
 type ItemId [2]int64

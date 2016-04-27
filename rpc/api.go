@@ -1,8 +1,8 @@
 package rpc
 
 import (
-	"moetang.info/go/common/async"
-	"moetang.info/go/common/context"
+	"import.moetang.info/go/nekoq-common/async"
+	"import.moetang.info/go/nekoq-common/context"
 )
 
 type Client interface {
