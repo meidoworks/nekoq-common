@@ -1,8 +1,11 @@
 package channel_test
 
 import (
-	"import.moetang.info/go/nekoq-common/channel"
 	"testing"
+)
+
+import (
+	"import.moetang.info/go/nekoq-common/channel"
 )
 
 func TestJudgeSendToClosedChannel(t *testing.T) {
@@ -17,6 +20,33 @@ func funcToTest() (resultError error) {
 	defer channel.JudgeSendToClosedChannel(func(err error) {
 		resultError = err
 	})
+	ch <- true
+	return
+}
+
+func BenchmarkJudgeSendToClosedChannelWithDefer(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		funcWithDefer()
+	}
+}
+
+func BenchmarkJudgeSendToClosedChannelWithoutDefer(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		funcWithoutDefer()
+	}
+}
+
+func funcWithDefer() (resultError error) {
+	ch := make(chan bool, 1)
+	defer channel.JudgeSendToClosedChannel(func(err error) {
+		resultError = err
+	})
+	ch <- true
+	return
+}
+
+func funcWithoutDefer() (resultError error) {
+	ch := make(chan bool, 1)
 	ch <- true
 	return
 }
