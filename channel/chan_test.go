@@ -29,7 +29,11 @@ func BenchmarkJudgeSendToClosedChannelWithDefer(b *testing.B) {
 		funcWithDefer()
 	}
 }
-
+func BenchmarkJudgeSendToClosedChannelWithDeferNop(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		funcWithDeferNop()
+	}
+}
 func BenchmarkJudgeSendToClosedChannelWithoutDefer(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		funcWithoutDefer()
@@ -41,6 +45,13 @@ func funcWithDefer() (resultError error) {
 	defer channel.JudgeSendToClosedChannel(func(err error) {
 		resultError = err
 	})
+	ch <- true
+	return
+}
+
+func funcWithDeferNop() (resultError error) {
+	ch := make(chan bool, 1)
+	defer channel.JudgeSendToClosedChannel(channel.OMIT_SEND_TO_CLOSED_CHANNEL_ERROR())
 	ch <- true
 	return
 }
