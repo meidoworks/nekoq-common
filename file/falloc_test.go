@@ -5,7 +5,7 @@ import (
 )
 
 import (
-	"import.moetang.info/go/nekoq-common/file"
+	"goimport.moetang.info/nekoq-common/file"
 )
 
 func TestPreAllocateFile(t *testing.T) {

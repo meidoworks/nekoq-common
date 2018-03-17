@@ -3,7 +3,7 @@ package concurrent
 import (
 	"sync"
 
-	"import.moetang.info/go/nekoq-common"
+	"goimport.moetang.info/nekoq-common"
 )
 
 type ConcurrentMap interface {
