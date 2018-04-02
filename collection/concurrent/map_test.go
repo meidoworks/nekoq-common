@@ -9,7 +9,7 @@ type item struct {
 	name     string
 }
 
-func (this *item) Hash() int32 {
+func (this *item) HashCode() int32 {
 	return this.hashCode
 }
 

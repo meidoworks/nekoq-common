@@ -2,20 +2,19 @@ package concurrent
 
 import (
 	"sync"
-
-	"goimport.moetang.info/nekoq-common"
+	"goimport.moetang.info/nekoq-api/object"
 )
 
 type ConcurrentMap interface {
-	Put(key common.HashObj, value interface{}) interface{}
-	Get(key common.HashObj) interface{}
-	Remove(key common.HashObj) interface{}
+	Put(key object.Object, value interface{}) interface{}
+	Get(key object.Object) interface{}
+	Remove(key object.Object) interface{}
 }
 
 type concurrentMap struct {
 	concurrentLevel int32
 	locks           []*sync.RWMutex
-	maps            []map[common.HashObj]interface{}
+	maps            []map[object.Object]interface{}
 }
 
 type CONCURRENT_LEVEL int32
@@ -37,18 +36,18 @@ func NewMap(cl CONCURRENT_LEVEL) ConcurrentMap {
 	m.concurrentLevel = int32(cl)
 
 	m.locks = make([]*sync.RWMutex, int(cl))
-	m.maps = make([]map[common.HashObj]interface{}, int(cl))
+	m.maps = make([]map[object.Object]interface{}, int(cl))
 
 	for i := 0; i < int(cl); i++ {
 		m.locks[i] = &sync.RWMutex{}
-		m.maps[i] = make(map[common.HashObj]interface{})
+		m.maps[i] = make(map[object.Object]interface{})
 	}
 
 	return m
 }
 
-func (this *concurrentMap) Put(key common.HashObj, value interface{}) (preObj interface{}) {
-	idx := int(key.Hash() & this.concurrentLevel)
+func (this *concurrentMap) Put(key object.Object, value interface{}) (preObj interface{}) {
+	idx := int(key.HashCode() & this.concurrentLevel)
 	lock := this.locks[idx]
 	m := this.maps[idx]
 	lock.Lock()
@@ -58,8 +57,8 @@ func (this *concurrentMap) Put(key common.HashObj, value interface{}) (preObj in
 	return
 }
 
-func (this *concurrentMap) Get(key common.HashObj) (obj interface{}) {
-	idx := int(key.Hash() & this.concurrentLevel)
+func (this *concurrentMap) Get(key object.Object) (obj interface{}) {
+	idx := int(key.HashCode() & this.concurrentLevel)
 	lock := this.locks[idx]
 	m := this.maps[idx]
 	lock.RLock()
@@ -68,8 +67,8 @@ func (this *concurrentMap) Get(key common.HashObj) (obj interface{}) {
 	return
 }
 
-func (this *concurrentMap) Remove(key common.HashObj) (preObj interface{}) {
-	idx := int(key.Hash() & this.concurrentLevel)
+func (this *concurrentMap) Remove(key object.Object) (preObj interface{}) {
+	idx := int(key.HashCode() & this.concurrentLevel)
 	lock := this.locks[idx]
 	m := this.maps[idx]
 	lock.Lock()
