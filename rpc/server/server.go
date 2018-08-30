@@ -1,9 +1,5 @@
 package server
 
-import "context"
-
 type Server interface {
-	Handle(serviceName string, handler Handler)
+	RegisterHandler(handler interface{}) error
 }
-
-type Handler func(req interface{}, ctx context.Context) (resp interface{}, err error)
