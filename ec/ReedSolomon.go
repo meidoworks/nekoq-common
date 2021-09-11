@@ -4,7 +4,7 @@ type reedsolomon struct {
 }
 
 func NewReedSolomon() *reedsolomon {
-
+	return nil
 }
 
 func (this *reedsolomon) Encode() {

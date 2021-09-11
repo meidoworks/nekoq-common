@@ -2,7 +2,8 @@ package concurrent
 
 import (
 	"sync"
-	"goimport.moetang.info/nekoq-api/object"
+
+	"github.com/meidoworks/nekoq-api/object"
 )
 
 type ConcurrentMap interface {

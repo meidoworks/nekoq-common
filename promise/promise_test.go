@@ -25,7 +25,7 @@ func BenchmarkAtomicAdd(b *testing.B) {
 	}
 }
 
-func ExamplePromiseBasicUsage(t *testing.T) {
+func TestPromiseBasicUsage(t *testing.T) {
 	p := NewSettablePromise(true)
 	p.AddListener(NewListener(func(i interface{}) {
 		t.Log(time.Now(), "pre listener finish")

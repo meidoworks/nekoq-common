@@ -5,7 +5,7 @@ import (
 )
 
 import (
-	"goimport.moetang.info/nekoq-common/channel"
+	"github.com/meidoworks/nekoq-common/channel"
 )
 
 func TestJudgeSendToClosedChannel(t *testing.T) {

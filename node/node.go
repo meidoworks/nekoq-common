@@ -2,10 +2,8 @@ package node
 
 import (
 	"unsafe"
-)
 
-import (
-	"goimport.moetang.info/nekoq-common/hash"
+	"github.com/meidoworks/nekoq-common/hash"
 )
 
 type ItemId [2]int64

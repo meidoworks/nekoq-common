@@ -2,10 +2,8 @@ package file_test
 
 import (
 	"testing"
-)
 
-import (
-	"goimport.moetang.info/nekoq-common/file"
+	"github.com/meidoworks/nekoq-common/file"
 )
 
 func TestPreAllocateFile(t *testing.T) {
